@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Update Employee</title>
+</head>
+<body>
+	<div align="center">
+		<h2>DB MANAGEMENT SYSTEM</h2>
+		<hr>
+		<h3>UPDATE EMPLOYEE</h3>		
+		<form th:action="@{/saveEmployee}" th:object="${employee}" 
+		method="POST">
+		<input type="hidden" th:field="*{id}">		
+		<br><br>
+		<input type="text" th:field="*{firstname}">
+		<br><br>
+		<input type="text" th:field="*{lastname}">
+		<br><br>
+		<input type="text" th:field="*{email}">
+		<br><br>
+		<button type="submit">UPDATE</button>		
+		</form>	
+	</div>
+</body>
+</html>

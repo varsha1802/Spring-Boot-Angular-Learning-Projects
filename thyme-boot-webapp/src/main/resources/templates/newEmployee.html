@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add New Employee</title>
+</head>
+<body>
+	<div align="center">
+		<h2>DB MANAGEMENT SYSTEM</h2>
+		<hr>
+		<h3>SAVE EMPLOYEE</h3>		
+		<form action='#' th:action="@{/saveEmployee}"  
+		method="POST">		
+		<input type="text"  name="firstname" placeholder="Enter Firstname" >
+		<br><br>
+		<input type="text"  name="lastname" placeholder="Enter Lastname" >
+		<br><br>
+		<input type="text"  name="email" placeholder="Enter Email" >
+		<br><br>
+		<button type="submit">SAVE</button>		
+		</form>	
+	</div>
+</body>
+</html>
