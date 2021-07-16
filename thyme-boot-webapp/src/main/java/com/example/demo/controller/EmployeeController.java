@@ -87,7 +87,7 @@ public class EmployeeController
 		Page<Employee> page = employeeService.findPaginated(pageNo, pageSize, sortField, sortDir);
 		List<Employee> listEmployees = page.getContent();
 		
-		model.addAttribute("listEmployees",listEmployees); //paged content
+		model.addAttribute("listEmployees",listEmployees); 
 		
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPages",page.getTotalPages()); 
