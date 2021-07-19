@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
 @Document(collection = "person")
 public class Person {
 	
@@ -46,8 +45,6 @@ public class Person {
 	}
 	public Person() {
 		super();
-	}
-	
-	
+	}	
 
 }

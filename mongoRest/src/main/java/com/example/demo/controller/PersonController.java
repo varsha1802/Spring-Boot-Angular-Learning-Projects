@@ -2,6 +2,10 @@ package com.example.demo.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,6 +70,48 @@ public class PersonController
 		personRepo.save(person);
 		return person;
 	}
-	*/	
+	*/
+	
+	@GetMapping("/persons/page/{pageNo}/{sortField}/{sortDir}")
+	public List<Person> findPaginated(@PathVariable("pageNo") int pageNo,
+			@PathVariable("sortField") String sortField,
+			@PathVariable("sortDir") String sortDir
+			)
+	{
+		int pageSize = 3;
+		Sort sort = sortDir.equals("asc") ? Sort.by(sortField).ascending() :
+			Sort.by(sortField).descending();
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		Page<Person> page = personRepo.findAll(pageable);		
+		return page.getContent();
+	}
+	
+	@GetMapping("/person-place/{place}")
+	public List<Person> findByname(@PathVariable String place)
+	{
+		List<Person> namelist = personRepo.findByPlace(place);
+		return namelist;
+	}
+	
+	@GetMapping("/person-greater/{age}")
+	public List<Person> findByGreater(@PathVariable int age)
+	{		
+		List<Person> greaterlist = personRepo.findByAgeGreaterThan(age);
+		return greaterlist;
+	}
+	
+	@GetMapping("/person-between/{age1}/{age2}")
+	public List<Person> findByageCriteria(@PathVariable int age1, @PathVariable int age2)
+	{		
+		List<Person> resultlist = personRepo.findPersonsByAgeBetween(age1, age2);
+		return resultlist;
+	}
+	
+	@GetMapping("/person-custom/{start}")
+	public List<Person> findByGreater(@PathVariable String start)
+	{		
+		List<Person> customPersons = personRepo.findByNameLikeOrderByAgeAsc(start);
+		return customPersons;
+	}
 
 }
