@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class AppSecurityConfig extends WebSecurityConfigurerAdapter //class has all methods for enabling security configurations
+public class SecurityConfig extends WebSecurityConfigurerAdapter //class has all methods for enabling security configurations
 {
 	/*
 	@Bean	
@@ -29,11 +29,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter //class has 
 	protected UserDetailsService userDetailsService()
 	{
 		List<UserDetails> users = new ArrayList<>();
-		users.add(User.withDefaultPasswordEncoder().username("varsha").password("1234").roles("USER").build());
+		users.add(User.withDefaultPasswordEncoder().username("varsha").password("1234").roles("ADMIN").build());
 		return new InMemoryUserDetailsManager(users);
-	}
-	*/
-	
+	}*/
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -46,4 +44,14 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter //class has 
 		provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
 		return provider;
 	}	
+	/*@Override
+	 protected void configure(HttpSecurity http) throws Exception {
+	      http
+	        .authorizeRequests()
+	        .antMatchers("/person").permitAll()
+	        .anyRequest().authenticated();           
+	       
+	}*/
+	
+	
 }
