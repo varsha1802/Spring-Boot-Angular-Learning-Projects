@@ -113,7 +113,7 @@ public class AlienController
 	*/
 	
 		
-	@RequestMapping("/aliens")
+	@GetMapping("/aliens")
 	@ResponseBody
 	public List<Alien> getAliens()
 	{
@@ -122,7 +122,7 @@ public class AlienController
 	
 	
 	/*
-	@RequestMapping(path="/aliens",produces= {"application/xml"})
+	@GetMapping(path="/aliens",produces= {"application/xml"})
 	@ResponseBody
 	public List<Alien> getAliens()
 	{
@@ -130,7 +130,7 @@ public class AlienController
 	}
 	*/
 	
-	@RequestMapping("/alien/{aid}")
+	@GetMapping("/alien/{aid}")
 	@ResponseBody
 	public Optional<Alien> fetchAlien(@PathVariable("aid") int aid)
 	{
@@ -154,7 +154,7 @@ public class AlienController
 		return "Deleted.....!";
 	}
 	
-	@PutMapping("/alien") //"consumes" attribute ==> specifies what type of data to accept
+	@PutMapping("/alien") 
 	@ResponseBody
 	public Alien updAlien(@RequestBody Alien alien)
 	{
