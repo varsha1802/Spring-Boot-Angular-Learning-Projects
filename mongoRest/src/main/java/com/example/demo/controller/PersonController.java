@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+
 import com.example.demo.model.Person;
 import com.example.demo.repositories.PersonRepo;
 
@@ -25,12 +31,15 @@ public class PersonController
 	public PersonRepo personRepo;
 	
 	@GetMapping(value = "/persons")
+	
 	public List<Person> getAllPersons()
-	{
-		return personRepo.findAll();		
+	{		
+		return personRepo.findAll();	
+		
 	}
 	
 	@PostMapping(value = "/person")
+	
 	public String createPerson(@RequestBody Person person) {
 		
 		Person insertedPerson = personRepo.insert(person);
@@ -38,12 +47,14 @@ public class PersonController
 	}
 	
 	@GetMapping("/person/{pid}")
+	
 	public Person fetchPerson(@PathVariable("pid") int pid)
 	{
 		return personRepo.findById(pid).orElse(null);
 	}
 	
 	@DeleteMapping("/person/{id}") 
+	
 	public String deletePerson(@PathVariable int id)
 	{
 		Person person = personRepo.findById(id).orElse(null);
@@ -52,6 +63,7 @@ public class PersonController
 	}
 	
 	@PutMapping("/person") 
+	
 	public Person updPerson(@RequestBody Person person)
 	{
 		int id = (int)person.getId();
@@ -65,7 +77,8 @@ public class PersonController
 	}
 	
 	/*
-	@PutMapping("/person") 
+	@PutMapping("/person")
+ 
 	public Person updPerson(@RequestBody Person person)
 	{
 		personRepo.save(person);
@@ -74,6 +87,7 @@ public class PersonController
 	*/
 	
 	@GetMapping("/persons/page/{pageNo}/{sortField}/{sortDir}")
+
 	public List<Person> findPaginated(@PathVariable("pageNo") int pageNo,
 			@PathVariable("sortField") String sortField,
 			@PathVariable("sortDir") String sortDir
@@ -88,6 +102,7 @@ public class PersonController
 	}
 	
 	@GetMapping("/person-place/{place}")
+	
 	public List<Person> findByname(@PathVariable String place)
 	{
 		List<Person> namelist = personRepo.findByPlace(place);
@@ -95,6 +110,7 @@ public class PersonController
 	}
 	
 	@GetMapping("/person-greater/{age}")
+
 	public List<Person> findByGreater(@PathVariable int age)
 	{		
 		List<Person> greaterlist = personRepo.findByAgeGreaterThan(age);
@@ -102,6 +118,7 @@ public class PersonController
 	}
 	
 	@GetMapping("/person-between/{age1}/{age2}")
+	
 	public List<Person> findByageCriteria(@PathVariable int age1, @PathVariable int age2)
 	{		
 		List<Person> resultlist = personRepo.findPersonsByAgeBetween(age1, age2);
@@ -109,10 +126,13 @@ public class PersonController
 	}
 	
 	@GetMapping("/person-custom/{start}")
+
 	public List<Person> findByGreater(@PathVariable String start)
 	{		
 		List<Person> customPersons = personRepo.findByNameLikeOrderByAgeAsc(start);
 		return customPersons;
 	}
+	
+	
 
 }
