@@ -44,14 +44,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter //class has all
 		provider.setUserDetailsService(userDetailsService);
 		provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
 		return provider;
-	}
-	
-	/*@Override
-	 protected void configure(HttpSecurity http) throws Exception {
-	      http
-	        .authorizeRequests()
-	        .antMatchers("/person").permitAll()
-	        .anyRequest().authenticated();           
-	       
-	}*/	
+	}	
 }
