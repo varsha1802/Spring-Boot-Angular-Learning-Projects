@@ -44,5 +44,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter //class has all
 		provider.setUserDetailsService(userDetailsService);
 		provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
 		return provider;
+	}
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+			.csrf().disable()
+			.authorizeRequests().antMatchers("/login").permitAll()
+			.anyRequest().authenticated()
+			.and()
+			.formLogin()
+			.loginPage("/login").permitAll()
+			.and()
+			.logout().invalidateHttpSession(true)
+			.clearAuthentication(true)
+			.logoutSuccessUrl("/logout-success").permitAll();			
 	}	
 }

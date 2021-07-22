@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.model.Person;
 import com.example.demo.repositories.PersonRepo;
 
-@RestController
+@Controller
 public class PersonController 
 {
 	
@@ -31,7 +31,7 @@ public class PersonController
 	public PersonRepo personRepo;
 	
 	@GetMapping(value = "/persons")
-	
+	@ResponseBody
 	public List<Person> getAllPersons()
 	{		
 		return personRepo.findAll();	
@@ -39,7 +39,7 @@ public class PersonController
 	}
 	
 	@PostMapping(value = "/person")
-	
+	@ResponseBody
 	public String createPerson(@RequestBody Person person) {
 		
 		Person insertedPerson = personRepo.insert(person);
@@ -47,14 +47,14 @@ public class PersonController
 	}
 	
 	@GetMapping("/person/{pid}")
-	
+	@ResponseBody
 	public Person fetchPerson(@PathVariable("pid") int pid)
 	{
 		return personRepo.findById(pid).orElse(null);
 	}
 	
 	@DeleteMapping("/person/{id}") 
-	
+	@ResponseBody
 	public String deletePerson(@PathVariable int id)
 	{
 		Person person = personRepo.findById(id).orElse(null);
@@ -63,7 +63,7 @@ public class PersonController
 	}
 	
 	@PutMapping("/person") 
-	
+	@ResponseBody
 	public Person updPerson(@RequestBody Person person)
 	{
 		int id = (int)person.getId();
@@ -78,7 +78,7 @@ public class PersonController
 	
 	/*
 	@PutMapping("/person")
- 
+ 	@ResponseBody
 	public Person updPerson(@RequestBody Person person)
 	{
 		personRepo.save(person);
@@ -87,7 +87,7 @@ public class PersonController
 	*/
 	
 	@GetMapping("/persons/page/{pageNo}/{sortField}/{sortDir}")
-
+	@ResponseBody
 	public List<Person> findPaginated(@PathVariable("pageNo") int pageNo,
 			@PathVariable("sortField") String sortField,
 			@PathVariable("sortDir") String sortDir
@@ -102,7 +102,7 @@ public class PersonController
 	}
 	
 	@GetMapping("/person-place/{place}")
-	
+	@ResponseBody
 	public List<Person> findByname(@PathVariable String place)
 	{
 		List<Person> namelist = personRepo.findByPlace(place);
@@ -110,7 +110,7 @@ public class PersonController
 	}
 	
 	@GetMapping("/person-greater/{age}")
-
+	@ResponseBody
 	public List<Person> findByGreater(@PathVariable int age)
 	{		
 		List<Person> greaterlist = personRepo.findByAgeGreaterThan(age);
@@ -118,7 +118,7 @@ public class PersonController
 	}
 	
 	@GetMapping("/person-between/{age1}/{age2}")
-	
+	@ResponseBody
 	public List<Person> findByageCriteria(@PathVariable int age1, @PathVariable int age2)
 	{		
 		List<Person> resultlist = personRepo.findPersonsByAgeBetween(age1, age2);
@@ -126,13 +126,30 @@ public class PersonController
 	}
 	
 	@GetMapping("/person-custom/{start}")
-
+	@ResponseBody
 	public List<Person> findByGreater(@PathVariable String start)
 	{		
 		List<Person> customPersons = personRepo.findByNameLikeOrderByAgeAsc(start);
 		return customPersons;
 	}
 	
+	@RequestMapping("/")
+	public String home()
+	{
+		return "home.jsp";
+	}
+	
+	@RequestMapping("/login")
+	public String login()
+	{
+		return "login.jsp";
+	}
+	
+	@RequestMapping("/logout-success")
+	public String logout()
+	{
+		return "logout.jsp";
+	}
 	
 
 }
