@@ -29,9 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter //class has all
 	protected UserDetailsService userDetailsService()
 	{
 		List<UserDetails> users = new ArrayList<>();
-		users.add(User.withDefaultPasswordEncoder().username("varsha").password("1234").roles("ADMIN").build());
+		users.add(User.withDefaultPasswordEncoder().username("varsha").password("1234").roles("USER").build());
 		return new InMemoryUserDetailsManager(users);
-	}*/
+	}
+	*/
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -52,7 +53,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter //class has all
 	        .antMatchers("/person").permitAll()
 	        .anyRequest().authenticated();           
 	       
-	}*/
-	
-	
+	}*/	
 }

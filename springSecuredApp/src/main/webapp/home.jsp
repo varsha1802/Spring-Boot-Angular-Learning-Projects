@@ -8,6 +8,6 @@
 </head>
 <body><center>
 	<h2>Welcome Home....!</h2>
-	<a href="/logout">Logut</a>
+	<a href="/logout">Logout</a>
 </body></center>
 </html>
