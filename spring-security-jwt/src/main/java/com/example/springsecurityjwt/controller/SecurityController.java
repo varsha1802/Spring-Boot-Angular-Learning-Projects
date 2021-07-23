@@ -46,7 +46,6 @@ public class SecurityController {
 			throw new Exception("Incorrect username or password", e);
 		}
 
-
 		final UserDetails userDetails = userDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
 
