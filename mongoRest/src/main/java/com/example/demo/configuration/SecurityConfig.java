@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter //class has all
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
-			.loginPage("/login").permitAll()
+			.loginPage("/login")
 			.and()
 			.logout().invalidateHttpSession(true)
 			.clearAuthentication(true)
