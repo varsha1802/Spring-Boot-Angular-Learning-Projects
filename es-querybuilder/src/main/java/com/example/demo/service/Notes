@@ -1,0 +1,17 @@
+1) Request Body parameters
+
+sourceBuilder.from(0); 
+sourceBuilder.size(5); 
+
+2) Whatever the method used to create it,
+   the QueryBuilder object must be added to the SearchSourceBuilder as follows:
+ 
+QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("user", "kimchy")
+                                                .fuzziness(Fuzziness.AUTO);                              
+searchSourceBuilder.query(matchQueryBuilder);
+
+3) Sorting
+
+sourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC)); 
+sourceBuilder.sort(new FieldSortBuilder("id").order(SortOrder.ASC));  
+
