@@ -5,26 +5,30 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.data.mongodb.core.mapping.Field;
 
 
 @Entity
 public class Todo {
 	@Id
-	@GeneratedValue
-	private Long id;
+	//@Field("my_object_id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private String id;
 	private String username;
 	private String description;
 	private Date targetDate;
-	private boolean isDone;
+	private String priority;
 	
-	public Todo(Long id, String username, String description, Date targetDate, boolean isDone) {
+	public Todo(String id, String username, String description, Date targetDate, String priority) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.description = description;
 		this.targetDate = targetDate;
-		this.isDone = isDone;
+		this.priority = priority;
 	}
 	
 	
@@ -33,10 +37,10 @@ public class Todo {
 	}
 	
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getUsername() {
@@ -57,11 +61,11 @@ public class Todo {
 	public void setTargetDate(Date targetDate) {
 		this.targetDate = targetDate;
 	}
-	public boolean getIsDone() {
-		return isDone;
+	public String getPriority() {
+		return priority;
 	}
-	public void setIsDone(boolean isDone) {
-		this.isDone = isDone;
+	public void setPriority(String priority) {
+		this.priority = priority;
 	}
 
 	@Override
