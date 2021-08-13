@@ -1,78 +1,61 @@
 package com.example.demo.jwt;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.demo.jwt.source.User;
 
 public class JwtUserDetails implements UserDetails {
 
-  private static final long serialVersionUID = 5155720064139820502L;
+	private User user;	
 
-  private final Long id;
-  private final String username;
-  private final String password;
-  private final Collection<? extends GrantedAuthority> authorities;
+	public JwtUserDetails(User user) {
+		this.user = user;
+	}
 
-  public JwtUserDetails(Long id, String username, String password, String role) {
-    this.id = id;
-    this.username = username;
-    this.password = password;
+	@Override
+	public String getPassword() {
 
-    List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-    authorities.add(new SimpleGrantedAuthority(role));
+		return user.getPassword();
+	}
 
-    this.authorities = authorities;
-  }
+	@Override
+	public String getUsername() {
 
-  @JsonIgnore
-  public Long getId() {
-    return id;
-  }
+		return user.getUsername();
+	}
+	
+	public String getId() {
+		return user.getId();
+	}
 
-  @Override
-  public String getUsername() {
-    return username;
-  }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-  @JsonIgnore
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-  @JsonIgnore
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-  @JsonIgnore
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
 
-  @JsonIgnore
-  @Override
-  public String getPassword() {
-    return password;
-  }
-
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return authorities;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return true;
-  }
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
 }
 

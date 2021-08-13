@@ -24,9 +24,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private JwtUnAuthorizedResponseAuthenticationEntryPoint jwtUnAuthorizedResponseAuthenticationEntryPoint;
-
-    @Autowired
     private UserDetailsService jwtInMemoryUserDetailsService;
 
     @Autowired
@@ -57,18 +54,13 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
             .csrf().disable()
-            .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and()
+            .exceptionHandling().and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
             .anyRequest().authenticated();
 
        httpSecurity
             .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        
-        httpSecurity
-            .headers()
-            .frameOptions().sameOrigin()  //H2 Console Needs this setting
-            .cacheControl(); //disable caching
     }
 
     @Override
@@ -85,10 +77,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(
                 HttpMethod.GET,
                 "/" //Other Stuff You want to Ignore
-            )
-            .and()
-            .ignoring()
-            .antMatchers("/h2-console/**/**");//Should not be in Production!
+            );
     }
 }
 

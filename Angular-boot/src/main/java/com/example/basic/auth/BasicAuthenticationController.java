@@ -12,7 +12,6 @@ public class BasicAuthenticationController {
 	@GetMapping("/basicauth")
 	public AuthenticationBean helloWorldBean()
 	{
-		//throw new RuntimeException("Some error has happened");
 		return new AuthenticationBean("You are authenticated");
 	}
 	
