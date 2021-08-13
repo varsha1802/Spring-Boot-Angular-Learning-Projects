@@ -10,9 +10,9 @@ import com.example.demo.jwt.source.User;
 import com.example.demo.jwt.source.UserRepository;
 
 @Service
-public class JwtInMemoryUserDetailsService implements UserDetailsService {
+public class JwtUserDetailsService implements UserDetailsService {
 
-/*	
+	/*	
 	static List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
 
   		static {
@@ -26,24 +26,24 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 	  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 	    Optional<JwtUserDetails> findFirst = inMemoryUserList.stream()
 	        .filter(user -> user.getUsername().equals(username)).findFirst();
-	
+
 	    if (!findFirst.isPresent()) {
 	      throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", username));
 	    }
-	
+
 	    return findFirst.get();
 	  }
-*/
+	 */
 	@Autowired
 	private UserRepository repo;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
 	{		
 		User user = repo.findByUsername(username);
 		if(user==null)
 			throw new UsernameNotFoundException("User not found");		
-		
+
 		return new JwtUserDetails(user);
 	}
 }
