@@ -28,6 +28,6 @@ public class SampleController {
 	@GetMapping("/hellopath/{name}")
 	HelloBean hellopath(@PathVariable String name)
 	{
-		return new HelloBean(String.format("hello world ,%s", name));
+		return new HelloBean(String.format("hello %s....! welcome", name));
 	}
 }

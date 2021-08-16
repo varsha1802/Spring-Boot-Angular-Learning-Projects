@@ -20,7 +20,7 @@ public class HelloBean{
 
 	@Override
 	public String toString() {
-		return "HelloBean [message=" + message + "]";
+		return "Hello [message=" + message + "]";
 	}
 
 }

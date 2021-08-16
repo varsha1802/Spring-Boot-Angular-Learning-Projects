@@ -8,13 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.data.mongodb.core.mapping.Field;
 
 
 @Entity
 public class Todo {
 	@Id
-	//@Field("my_object_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
 	private String username;
@@ -30,12 +28,6 @@ public class Todo {
 		this.targetDate = targetDate;
 		this.priority = priority;
 	}
-	
-	
-	public Todo() {
-		
-	}
-	
 	
 	public String getId() {
 		return id;
@@ -67,23 +59,5 @@ public class Todo {
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Todo other = (Todo) obj;
-		return id == other.id;
-	}	
-	
 
 }

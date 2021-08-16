@@ -1,8 +1,7 @@
 package com.example.demo.jwt.source;
 
-import java.io.Serializable;
 
-public class JwtTokenResponse implements Serializable {
+public class JwtTokenResponse{
 
 	private final String token;
 

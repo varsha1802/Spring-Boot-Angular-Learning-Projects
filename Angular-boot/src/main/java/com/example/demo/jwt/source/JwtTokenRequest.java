@@ -1,8 +1,6 @@
 package com.example.demo.jwt.source;
 
-import java.io.Serializable;
-
-public class  JwtTokenRequest implements Serializable {
+public class  JwtTokenRequest{
  
   private String username;
     private String password;
